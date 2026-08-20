@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button"
 
 const projects = [
   {
-    title: "Real Estate ERP System",
+    title: "Workshop ERP System",
     description:
-      "Customized ERP solution for HNS Group real estate operations with MySQL database optimization and business process automation.",
+      "Customized ERP solution for workshop operations with MySQL database optimization and business process automation.",
     tech: ["MySQL", "Laravel", "PHP", "ERP"],
     icon: Database,
     color: "from-blue-500 to-cyan-500",
