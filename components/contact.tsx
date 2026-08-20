@@ -33,14 +33,23 @@ export function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSent, setIsSent] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    setIsSent(false)
+
+    const form = new FormData(e.currentTarget)
+    const name = String(form.get("name") || "")
+    const email = String(form.get("email") || "")
+    const message = String(form.get("message") || "")
+    const subject = encodeURIComponent(`Portfolio contact from ${name}`)
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)
+
+    window.location.href = `mailto:nishan5505@gmail.com?subject=${subject}&body=${body}`
     setIsSubmitting(false)
-    alert("Thank you for your message! I'll get back to you soon.")
+    setIsSent(true)
   }
 
   return (
@@ -113,6 +122,7 @@ export function Contact() {
                   <Field>
                     <FieldLabel>Your Name</FieldLabel>
                     <Input
+                      name="name"
                       type="text"
                       placeholder="John Doe"
                       required
@@ -122,6 +132,7 @@ export function Contact() {
                   <Field>
                     <FieldLabel>Your Email</FieldLabel>
                     <Input
+                      name="email"
                       type="email"
                       placeholder="john@example.com"
                       required
@@ -131,6 +142,7 @@ export function Contact() {
                   <Field>
                     <FieldLabel>Message</FieldLabel>
                     <Textarea
+                      name="message"
                       placeholder="Your message..."
                       rows={5}
                       required
@@ -152,6 +164,11 @@ export function Contact() {
                       </>
                     )}
                   </Button>
+                  {isSent && (
+                    <p className="text-sm text-primary" role="status">
+                      Your email app has opened with the message addressed to nishan5505@gmail.com.
+                    </p>
+                  )}
                 </FieldGroup>
               </form>
             </motion.div>

@@ -84,9 +84,11 @@ export function Hero() {
               transition={{ delay: 0.6 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
             >
-              <Button size="lg" className="gap-2">
-                <Download className="h-5 w-5" />
-                Download CV
+              <Button asChild size="lg" className="gap-2">
+                <a href="/Muktaderul-Kader-Resume.pdf" download="Muktaderul-Kader-Resume.pdf">
+                  <Download className="h-5 w-5" />
+                  Download CV
+                </a>
               </Button>
               <Button size="lg" variant="outline" onClick={scrollToContact} className="gap-2">
                 <Mail className="h-5 w-5" />
